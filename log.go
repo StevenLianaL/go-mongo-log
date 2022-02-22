@@ -5,6 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"mongo-log/helper"
+	"mongo-log/level"
 	"time"
 )
 
@@ -35,12 +36,28 @@ func (m *Manager) Log(msg string, level string, user int) {
 		app:      m.App,
 	}
 	_, _ = m.Collection.InsertOne(*m.Ctx, bson.D{
-		{"Log", recorder.log},
+		{"log", recorder.log},
 		{"level", recorder.level},
 		{"function", recorder.function},
 		{"created", recorder.created},
 		{"user", recorder.user},
-		{"Project", recorder.project},
-		{"App", recorder.app},
+		{"project", recorder.project},
+		{"app", recorder.app},
 	})
+}
+
+func (m *Manager) Info(msg string, user int) {
+	m.Log(msg, level.INFO, user)
+}
+
+func (m *Manager) Debug(msg string, user int) {
+	m.Log(msg, level.DEBUG, user)
+}
+
+func (m *Manager) Warning(msg string, user int) {
+	m.Log(msg, level.WARNING, user)
+}
+
+func (m *Manager) Error(msg string, user int) {
+	m.Log(msg, level.ERROR, user)
 }

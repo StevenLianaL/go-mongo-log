@@ -13,10 +13,10 @@ func CurrentMonth() string {
 }
 
 func GetFuncName() string {
-	pc := make([]uintptr, 5)
+	pc := make([]uintptr, 10)
 	runtime.Callers(0, pc)
 	var fullName = runtime.FuncForPC(pc[3]).Name()
 	splitName := strings.Split(fullName, ".")
-	var name = splitName[len(splitName)-1]
+	var name = splitName[len(splitName)-2]
 	return name
 }
