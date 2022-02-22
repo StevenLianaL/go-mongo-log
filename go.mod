@@ -1,4 +1,4 @@
-module mongo-log
+module github.com/StevenlianaL/mongo-log
 
 go 1.18
 
