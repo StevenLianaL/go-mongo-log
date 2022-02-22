@@ -2,6 +2,7 @@ package log
 
 import (
 	"context"
+	"fmt"
 	"mongo-log"
 	"mongo-log/driver"
 	"mongo-log/level"
@@ -14,6 +15,7 @@ import (
 func TestManagerInWg(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
+	fmt.Println("tag")
 	collection := driver.GetCollection("test", "test", "test", "test", "localhost", &ctx)
 	var manager = mongo_log.Manager{
 		Project:    "test",
