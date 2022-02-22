@@ -10,3 +10,12 @@ func TestCurrentMonth(t *testing.T) {
 		t.Log("CurrentMonth() = ", month)
 	}
 }
+
+func TestGetFuncName(t *testing.T) {
+	name := GetFuncName()
+	if name != "tRunner" {
+		t.Errorf("GetFuncName() = %v, want %v", name, "tRunner")
+	} else {
+		t.Log("GetFuncName() = ", name)
+	}
+}
