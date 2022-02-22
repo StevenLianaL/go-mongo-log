@@ -1,9 +1,12 @@
-package helper
+package test
 
-import "testing"
+import (
+	"mongo-log"
+	"testing"
+)
 
 func TestCurrentMonth(t *testing.T) {
-	month := CurrentMonth()
+	month := mongo_log.CurrentMonth()
 	if month != "2022-02" {
 		t.Errorf("CurrentMonth() = %v, want %v", month, "2022-02")
 	} else {
@@ -12,7 +15,7 @@ func TestCurrentMonth(t *testing.T) {
 }
 
 func TestGetFuncName(t *testing.T) {
-	name := GetFuncName()
+	name := mongo_log.GetFuncName()
 	if name != "tRunner" {
 		t.Errorf("GetFuncName() = %v, want %v", name, "tRunner")
 	} else {

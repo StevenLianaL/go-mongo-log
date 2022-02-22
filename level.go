@@ -1,4 +1,4 @@
-package level
+package mongo_log
 
 const DEBUG = "DEBUG"
 const INFO = "INFO"

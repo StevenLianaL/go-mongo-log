@@ -4,8 +4,6 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"mongo-log/helper"
-	"mongo-log/level"
 	"time"
 )
 
@@ -29,7 +27,7 @@ func (m *Manager) Log(msg string, level string, user int) {
 	var recorder = Recorder{
 		log:      msg,
 		level:    level,
-		function: helper.GetFuncName(),
+		function: GetFuncName(),
 		created:  time.Now(),
 		user:     user,
 		project:  m.Project,
@@ -47,17 +45,17 @@ func (m *Manager) Log(msg string, level string, user int) {
 }
 
 func (m *Manager) Info(msg string, user int) {
-	m.Log(msg, level.INFO, user)
+	m.Log(msg, INFO, user)
 }
 
 func (m *Manager) Debug(msg string, user int) {
-	m.Log(msg, level.DEBUG, user)
+	m.Log(msg, DEBUG, user)
 }
 
 func (m *Manager) Warning(msg string, user int) {
-	m.Log(msg, level.WARNING, user)
+	m.Log(msg, WARNING, user)
 }
 
 func (m *Manager) Error(msg string, user int) {
-	m.Log(msg, level.ERROR, user)
+	m.Log(msg, ERROR, user)
 }

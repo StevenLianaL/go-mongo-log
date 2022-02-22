@@ -1,4 +1,4 @@
-package helper
+package mongo_log
 
 import (
 	"fmt"

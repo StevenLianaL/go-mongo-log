@@ -1,11 +1,9 @@
-package log
+package test
 
 import (
 	"context"
 	"fmt"
 	"mongo-log"
-	"mongo-log/driver"
-	"mongo-log/level"
 	"sync"
 	"testing"
 	"time"
@@ -16,7 +14,7 @@ func TestManagerInWg(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	fmt.Println("tag")
-	collection := driver.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	collection := mongo_log.GetCollection("test", "test", "test", "test", "localhost", &ctx)
 	var manager = mongo_log.Manager{
 		Project:    "test",
 		App:        "test",
@@ -28,7 +26,7 @@ func TestManagerInWg(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func(i int) {
-			manager.Log("a new log", level.INFO, i)
+			manager.Log("a new log", mongo_log.INFO, i)
 			wg.Done()
 		}(i)
 	}
@@ -38,7 +36,7 @@ func TestManagerInWg(t *testing.T) {
 func TestManagerInRoutine(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	collection := driver.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	collection := mongo_log.GetCollection("test", "test", "test", "test", "localhost", &ctx)
 	var manager = mongo_log.Manager{
 		Project:    "test",
 		App:        "test",
@@ -47,7 +45,7 @@ func TestManagerInRoutine(t *testing.T) {
 	}
 	t.Log(manager)
 	for i := 0; i < 10; i++ {
-		go manager.Log("a new log", level.INFO, i)
+		go manager.Log("a new log", mongo_log.INFO, i)
 	}
 	time.Sleep(time.Second * 1)
 }
