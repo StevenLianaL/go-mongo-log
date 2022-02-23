@@ -36,7 +36,7 @@ func (m *Manager) Log(msg string, level string, user int) {
 	_, _ = m.Collection.InsertOne(*m.Ctx, bson.D{
 		{"log", recorder.log},
 		{"level", recorder.level},
-		{"function", recorder.function},
+		{"func", recorder.function},
 		{"created", recorder.created},
 		{"user", recorder.user},
 		{"project", recorder.project},

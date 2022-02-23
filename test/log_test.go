@@ -3,7 +3,7 @@ package test
 import (
 	"context"
 	"fmt"
-	"mongo-log"
+	mongoLog "github.com/StevenlianaL/mongo-log"
 	"sync"
 	"testing"
 	"time"
@@ -14,8 +14,8 @@ func TestManagerInWg(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	fmt.Println("tag")
-	collection := mongo_log.GetCollection("test", "test", "test", "test", "localhost", &ctx)
-	var manager = mongo_log.Manager{
+	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	var manager = mongoLog.Manager{
 		Project:    "test",
 		App:        "test",
 		Collection: collection,
@@ -26,7 +26,7 @@ func TestManagerInWg(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
 		go func(i int) {
-			manager.Log("a new log", mongo_log.INFO, i)
+			manager.Log("a new log", mongoLog.INFO, i)
 			wg.Done()
 		}(i)
 	}
@@ -36,8 +36,8 @@ func TestManagerInWg(t *testing.T) {
 func TestManagerInRoutine(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	collection := mongo_log.GetCollection("test", "test", "test", "test", "localhost", &ctx)
-	var manager = mongo_log.Manager{
+	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	var manager = mongoLog.Manager{
 		Project:    "test",
 		App:        "test",
 		Collection: collection,
@@ -45,7 +45,7 @@ func TestManagerInRoutine(t *testing.T) {
 	}
 	t.Log(manager)
 	for i := 0; i < 10; i++ {
-		go manager.Log("a new log", mongo_log.INFO, i)
+		go manager.Log("a new log", mongoLog.INFO, i)
 	}
 	time.Sleep(time.Second * 1)
 }
