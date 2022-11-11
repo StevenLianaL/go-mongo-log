@@ -14,7 +14,7 @@ func TestManagerInWg(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	fmt.Println("tag")
-	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", 27017, &ctx)
 	var manager = mongoLog.Manager{
 		Project:    "test",
 		App:        "test",
@@ -36,7 +36,7 @@ func TestManagerInWg(t *testing.T) {
 func TestManagerInRoutine(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", &ctx)
+	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", 27017, &ctx)
 	var manager = mongoLog.Manager{
 		Project:    "test",
 		App:        "test",

@@ -11,7 +11,7 @@ import (
 func init() {
 	var Ctx = context.Background()
 
-	Collection = mongolog.GetCollection("db_name", "collection_name", "user", "pass", "localhost", &Ctx)
+	Collection = mongolog.GetCollection("db_name", "collection_name", "user", "pass", "localhost",27017, &Ctx)
 	Manager = mongolog.Manager{
 		Project:    "project",
 		App:        "app",
