@@ -17,20 +17,17 @@ func GetFuncName() string {
 
 	// 获取当前的调用栈信息，跳过前两层调用（printStackTrace 和 runtime.Caller）
 	n := runtime.Callers(2, stackTrace)
-	if n <= 0 {
-		return "Unknown"
+
+	// 打印调用栈信息
+	var theFuncNames []string
+	for i := 0; i < n-1; i++ {
+		pc := stackTrace[i]
+		funcName := runtime.FuncForPC(pc).Name()
+		fmt.Println(funcName, "func name")
+		theFuncNames = append(theFuncNames, funcName)
 	}
+	finalFuncName := strings.Split(theFuncNames[len(theFuncNames)-1], ".")
+	theFinalFuncName := finalFuncName[len(finalFuncName)-2]
+	return theFinalFuncName
 
-	// 获取最后一个调用栈信息
-	pc := stackTrace[n-1]
-	funcName := runtime.FuncForPC(pc).Name()
-
-	// 使用 "." 分割字符串
-	parts := strings.Split(funcName, ".")
-	if len(parts) < 2 {
-		return "Unknown"
-	}
-
-	// 提取倒数第二部分
-	return parts[len(parts)-2]
 }
