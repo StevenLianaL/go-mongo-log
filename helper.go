@@ -23,7 +23,6 @@ func GetFuncName() string {
 	for i := 0; i < n-1; i++ {
 		pc := stackTrace[i]
 		funcName := runtime.FuncForPC(pc).Name()
-		fmt.Println(funcName, "func name")
 		theFuncNames = append(theFuncNames, funcName)
 	}
 	finalFuncName := strings.Split(theFuncNames[len(theFuncNames)-1], ".")
