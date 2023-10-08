@@ -9,6 +9,15 @@ import (
 	"time"
 )
 
+var ctx = context.Background()
+var collection = mongoLog.GetCollection("test", "test", "test", "test", "localhost", 27017, &ctx)
+var manager = mongoLog.Manager{
+	Project:    "test",
+	App:        "test",
+	Collection: collection,
+	Ctx:        &ctx,
+}
+
 // should use like this case
 func TestManagerInWg(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -34,15 +43,7 @@ func TestManagerInWg(t *testing.T) {
 }
 
 func TestManagerInRoutine(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	collection := mongoLog.GetCollection("test", "test", "test", "test", "localhost", 27017, &ctx)
-	var manager = mongoLog.Manager{
-		Project:    "test",
-		App:        "test",
-		Collection: collection,
-		Ctx:        &ctx,
-	}
+
 	t.Log(manager)
 	//for i := 0; i < 10; i++ {
 	//	go manager.Log("a new log out", mongoLog.INFO, i)
@@ -52,7 +53,5 @@ func TestManagerInRoutine(t *testing.T) {
 		manager.Log("a new log in go func", mongoLog.INFO, 0)
 		manager.Warning("a new log in go func warning ", 0)
 	}()
-	n := mongoLog.GetFuncName()
-	t.Log(n)
 	time.Sleep(time.Second * 1)
 }

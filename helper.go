@@ -13,6 +13,11 @@ func CurrentMonth() string {
 }
 
 func GetFuncName() string {
+	apc, _, _, _ := runtime.Caller(1)
+	funcName := runtime.FuncForPC(apc).Name()
+	// 只保留最后一个/后的部分，即函数名
+	parts := strings.Split(funcName, "/")
+	fmt.Println(parts, "parts names")
 	pc := make([]uintptr, 10)
 	runtime.Callers(0, pc)
 	var fullName = runtime.FuncForPC(pc[3]).Name()
