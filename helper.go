@@ -20,11 +20,17 @@ func printStackTrace() {
 
 	// 打印调用栈信息
 	fmt.Println("Call Stack:")
-	for i := 0; i < n; i++ {
+	var theFuncNames []string
+	for i := 0; i < n-1; i++ {
 		pc := stackTrace[i]
 		funcName := runtime.FuncForPC(pc).Name()
+		theFuncNames = append(theFuncNames, funcName)
 		fmt.Printf("kkkkk: %s\n", funcName)
 	}
+	finalFuncName := strings.Split(theFuncNames[len(theFuncNames)-1], ".")
+	fmt.Printf("final kkkkk: %s\n ", finalFuncName[len(finalFuncName)-2])
+	// 从 theFuncName 获取倒数第二个函数名（当前函数的上一层调用函数）
+
 }
 func GetFuncName() string {
 	printStackTrace()

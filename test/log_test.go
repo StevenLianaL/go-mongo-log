@@ -59,4 +59,5 @@ func TestFuncStack(t *testing.T) {
 	go func() {
 		manager.Warning("a new log in go func warning ", 0)
 	}()
+	time.Sleep(time.Second * 1)
 }
