@@ -17,6 +17,7 @@ func GetFuncName() string {
 	runtime.Callers(0, pc)
 	var fullName = runtime.FuncForPC(pc[3]).Name()
 	splitName := strings.Split(fullName, ".")
+	fmt.Println(splitName, "names")
 	var name = splitName[len(splitName)-2]
 	return name
 }

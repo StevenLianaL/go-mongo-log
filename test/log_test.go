@@ -44,8 +44,15 @@ func TestManagerInRoutine(t *testing.T) {
 		Ctx:        &ctx,
 	}
 	t.Log(manager)
-	for i := 0; i < 10; i++ {
-		go manager.Log("a new log", mongoLog.INFO, i)
-	}
+	//for i := 0; i < 10; i++ {
+	//	go manager.Log("a new log out", mongoLog.INFO, i)
+	//
+	//}
+	go func() {
+		manager.Log("a new log in go func", mongoLog.INFO, 0)
+		manager.Warning("a new log in go func warning", 0)
+	}()
+	n := mongoLog.GetFuncName()
+	t.Log(n)
 	time.Sleep(time.Second * 1)
 }
