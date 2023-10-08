@@ -55,3 +55,8 @@ func TestManagerInRoutine(t *testing.T) {
 	}()
 	time.Sleep(time.Second * 1)
 }
+func TestFuncStack(t *testing.T) {
+	go func() {
+		manager.Warning("a new log in go func warning ", 0)
+	}()
+}
