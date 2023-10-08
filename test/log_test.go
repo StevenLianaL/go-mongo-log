@@ -50,7 +50,7 @@ func TestManagerInRoutine(t *testing.T) {
 	//}
 	go func() {
 		manager.Log("a new log in go func", mongoLog.INFO, 0)
-		manager.Warning("a new log in go func warning", 0)
+		manager.Warning("a new log in go func warning ", 0)
 	}()
 	n := mongoLog.GetFuncName()
 	t.Log(n)
